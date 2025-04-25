@@ -1,0 +1,46 @@
+Fitur utama web lms pai
+1.Login dan Register:
+-Memastikan hanya pengguna terdaftar (guru atau siswa) yang dapat mengakses sistem.
+
+-Role Management:
+-Guru memiliki hak akses untuk mengelola kelas, materi, dan tugas.
+-Siswa hanya dapat membaca materi, mengumpulkan tugas, dan melihat nilai.
+
+2.Dashboard
+Guru:
+Ringkasan kelas yang diajarkan, jumlah materi yang dibuat, tugas yang diberikan, dan siswa yang terdaftar.
+
+Siswa:
+Daftar materi yang tersedia, tugas yang harus diselesaikan, dan nilai yang telah diperoleh.
+
+3.Manajemen Kelas
+-Guru dapat membuat, mengedit, atau menghapus kelas.
+-Menampilkan daftar siswa di setiap kelas.
+
+4.Manajemen Materi
+Guru dapat:
+Menambahkan materi pembelajaran berupa teks, gambar, atau file dokumen.
+Mengatur materi berdasarkan kelas.
+
+Siswa dapat:
+Melihat dan membaca materi yang disediakan oleh guru.
+
+5. Pengumpulan Tugas
+Guru dapat:
+Membuat tugas dengan deskripsi dan tenggat waktu.
+Melihat siapa saja siswa yang telah mengumpulkan tugas.
+
+Siswa dapat:
+Mengirimkan jawaban tugas berupa teks atau file.
+Melihat status tugas (sudah/tidak dikumpulkan).
+
+6.Penilaian Tugas
+Guru dapat:
+Memberikan nilai pada tugas yang dikumpulkan siswa.
+
+Siswa dapat:
+Melihat nilai dari guru.
+
+7.Profil Pengguna
+Guru dan siswa dapat mengelola profil mereka, termasuk:
+Mengedit nama, email, dan foto profil.

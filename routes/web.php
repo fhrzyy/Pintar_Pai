@@ -1,0 +1,45 @@
+<?php
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LandingController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
+
+// Landing page
+Route::get('/', [LandingController::class, 'index'])->name('landing');
+
+// Admin routes (tanpa autentikasi)
+Route::prefix('admin')->group(function () {
+    Route::get('/home', [AdminController::class, 'home'])->name('admin.home');
+
+    // Materi
+    Route::get('/materials', [AdminController::class, 'index'])->name('admin.materials.index');
+    Route::get('/materials/create', [AdminController::class, 'createMaterial'])->name('admin.materials.create');
+    Route::post('/materials', [AdminController::class, 'storeMaterial'])->name('admin.materials.store');
+    Route::get('/materials/{id}/edit', [AdminController::class, 'editMaterial'])->name('admin.materials.edit');
+    Route::put('/materials/{id}', [AdminController::class, 'updateMaterial'])->name('admin.materials.update');
+    Route::delete('/materials/{id}', [AdminController::class, 'destroyMaterial'])->name('admin.materials.destroy');
+
+    // Soal
+    Route::get('/questions', [AdminController::class, 'indexQuestion'])->name('admin.questions.index');
+    Route::get('/questions/create', [AdminController::class, 'createQuestion'])->name('admin.questions.create');
+    Route::post('/questions', [AdminController::class, 'storeQuestion'])->name('admin.questions.store');
+    Route::get('/questions/{id}/edit', [AdminController::class, 'editQuestion'])->name('admin.questions.edit');
+    Route::put('/questions/{id}', [AdminController::class, 'updateQuestion'])->name('admin.questions.update');
+    Route::delete('/questions/{id}', [AdminController::class, 'destroyQuestion'])->name('admin.questions.destroy');
+});
+
+// User routes (tanpa autentikasi)
+Route::prefix('user')->group(function () {
+    Route::get('/home', [UserController::class, 'home'])->name('user.home');
+    Route::get('/user/questions/{material}', [UserController::class, 'index'])->name('user.questions.index');
+
+    // Materi
+    Route::get('/materials', [UserController::class, 'materials'])->name('user.materials.index');
+    Route::get('/materials/{id}', [UserController::class, 'showMaterial'])->name('user.materials.show');
+
+    // Soal
+   
+    Route::get('/questions/select-material', [UserController::class, 'selectMaterialForQuestions'])->name('user.questions.select-material');
+    Route::get('/questions/material/{material_id}', [UserController::class, 'startQuestions'])->name('user.questions.start');
+    Route::post('/questions/material/{material_id}/{current_index}', [UserController::class, 'submitAnswer'])->name('user.questions.submit');
+});
