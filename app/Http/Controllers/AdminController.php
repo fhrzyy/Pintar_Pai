@@ -110,54 +110,49 @@ class AdminController extends Controller {
             'material_id' => 'required|exists:materials,id',
             'questions' => 'required|array|min:1',
             'questions.*.question_text' => 'required|string',
-            'questions.*.options' => 'required|array|min:2',
-            'questions.*.correct_answer' => 'required|string',
+            'questions.*.options' => 'required|array|size:4',
+            'questions.*.correct_answer' => 'required|in:A,B,C,D',
         ]);
-
-        foreach ($request->questions as $index => $questionData) {
-            // Validasi bahwa correct_answer ada di dalam options
-            if (!in_array($questionData['correct_answer'], $questionData['options'])) {
-                return back()->withErrors(['questions.' . $index . '.correct_answer' => 'Jawaban benar harus salah satu dari pilihan yang diberikan.'])->withInput();
-            }
-
+    
+        foreach ($request->questions as $questionData) {
+            // Konversi array options menjadi format dengan kunci A,B,C,D
+            $options = array_combine(['A', 'B', 'C', 'D'], $questionData['options']);
+    
             Question::create([
                 'material_id' => $request->material_id,
                 'question_text' => $questionData['question_text'],
-                'options' => $questionData['options'],
+                'options' => $options,
                 'correct_answer' => $questionData['correct_answer'],
             ]);
         }
-
-        return redirect()->route('admin.questions.index')->with('success', 'Soal-soal berhasil ditambahkan!');
+    
+        return redirect()->route('admin.questions.index')
+            ->with('success', 'Soal-soal berhasil ditambahkan!');
     }
-
-    // Form edit soal
-    public function editQuestion($id) {
-        $question = Question::findOrFail($id);
-        $materials = Material::all();
-        return view('admin.questions.edit', compact('question', 'materials'));
-    }
-
-    // Update soal
-    public function updateQuestion(Request $request, $id) {
+    
+    public function updateQuestion(Request $request, $id)
+    {
         $request->validate([
             'material_id' => 'required|exists:materials,id',
             'question_text' => 'required|string',
-            'options' => 'required|array|min:2',
-            'correct_answer' => 'required|string|in:' . implode(',', $request->options),
+            'options' => 'required|array|size:4',
+            'correct_answer' => 'required|in:A,B,C,D',
         ]);
-
+    
+        $options = array_combine(['A', 'B', 'C', 'D'], $request->options);
+    
         $question = Question::findOrFail($id);
         $question->update([
             'material_id' => $request->material_id,
             'question_text' => $request->question_text,
-            'options' => $request->options,
+            'options' => $options,
             'correct_answer' => $request->correct_answer,
         ]);
-
-        return redirect()->route('admin.questions.index')->with('success', 'Soal berhasil diperbarui!');
+    
+        return redirect()->route('admin.questions.index')
+            ->with('success', 'Soal berhasil diperbarui!');
     }
-
+    
     // Hapus soal
     public function destroyQuestion($id) {
         $question = Question::findOrFail($id);

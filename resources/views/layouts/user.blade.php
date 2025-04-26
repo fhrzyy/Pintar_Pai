@@ -27,8 +27,8 @@
                             </svg>
                         </div>  
                         <div>
-                            <h3 class="font-medium">Welcome Back</h3>
-                            <p class="text-xs text-indigo-200">User Dashboard</p>   
+                            <h3 class="font-medium">M.Fahrur Rozi</h3>
+                            <p class="text-xs text-indigo-200">Siswa</p>   
                         </div>
 
                     </div>
