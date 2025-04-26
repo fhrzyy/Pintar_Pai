@@ -17,7 +17,7 @@
                                 <div class="p-6 text-center">
                                     <h5 class="text-lg font-semibold mb-2">{{ $material->title }}</h5>
                                     <p class="text-gray-600 mb-4">Jumlah Soal: {{ $material->questions->count() }}</p>
-                                    <a href="{{ route('user.questions.index', $material->id) }}" 
+                                    <a href="{{ route('user.questions.show', $material->id) }}" 
                                     class="inline-block px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
                                         Kerjakan Soal
                                     </a>

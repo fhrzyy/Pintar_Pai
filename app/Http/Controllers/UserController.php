@@ -45,21 +45,40 @@ class UserController extends Controller
         return view('user.questions.index', compact('questions', 'material'));
     }
     
+    
     // Halaman Mengerjakan Soal
-    public function showQuestion($id)
+        public function showQuestion($material_id)
     {
-        $question = Question::with('material')->findOrFail($id);
-        return view('user.questions.show', compact('question'));
+        $material = Material::findOrFail($material_id);
+        $questions = Question::where('material_id', $material_id)->get();
+        return view('user.questions.show', compact('questions', 'material'));
     }
 
     // Proses Jawaban User
-    public function submitAnswer(Request $request, $id)
-    {
-        $question = Question::findOrFail($id);
-        $userAnswer = $request->input('answer');
-
-        $isCorrect = $userAnswer === $question->correct_answer;
-
-        return view('user.questions.result', compact('question', 'userAnswer', 'isCorrect'));
-    }
+               public function submitAnswer(Request $request, $material_id)
+        {
+            $answers = $request->input('answers');
+            $results = [];
+            $totalCorrect = 0;
+            
+            foreach($answers as $question_id => $userAnswer) {
+                $question = Question::findOrFail($question_id);
+                $isCorrect = $userAnswer === $question->correct_answer;
+                if($isCorrect) {
+                    $totalCorrect++;
+                }
+                $results[] = [
+                    'question' => $question,
+                    'userAnswer' => $userAnswer,
+                    'isCorrect' => $isCorrect
+                ];
+            }
+        
+            return view('user.questions.result', [
+                'results' => $results,
+                'totalQuestions' => count($answers),
+                'totalCorrect' => $totalCorrect,
+                'material_id' => $material_id
+            ]);
+        }
 }
