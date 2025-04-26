@@ -28,16 +28,28 @@
                         </div>
                         <div>
                             <h3 class="font-medium">Welcome Back</h3>
-                            <p class="text-xs text-indigo-200">User Dashboard</p>
+                            <p class="text-xs text-indigo-200">User Dashboard</p>   
                         </div>
 
                     </div>
                 </div>
             </div>
             <nav class="mt-2 px-4">
-                <p class="text-xs text-indigo-200 font-semibold px-2 mb-2">MAIN MENU</p>
                 <ul class="space-y-2">
                     <li class="transition-all duration-200 hover:bg-white/10 rounded-xl">
+                        <a href="{{ route('user.home') }}" class="flex items-center p-3 text-white group">
+                            <div class="bg-white/10 p-2 rounded-lg mr-3 group-hover:bg-white group-hover:text-indigo-600 transition-all duration-200">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                                </svg>
+                            </div>
+                            <span class="font-medium">Home</span>
+                        </a>
+                    </li>
+                </ul>
+            <p class="text-xs text-indigo-200 font-semibold px-2 mb-2">MAIN MENU</p>
+                <ul class="space-y-2">
+                <li class="transition-all duration-200 hover:bg-white/10 rounded-xl">
                         <a href="{{ route('user.materials.index') }}" class="flex items-center p-3 text-white group">
                             <div class="bg-white/10 p-2 rounded-lg mr-3 group-hover:bg-white group-hover:text-indigo-600 transition-all duration-200">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
