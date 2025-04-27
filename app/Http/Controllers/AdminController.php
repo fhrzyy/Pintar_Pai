@@ -152,6 +152,14 @@ class AdminController extends Controller {
         return redirect()->route('admin.questions.index')
             ->with('success', 'Soal berhasil diperbarui!');
     }
+
+    // Form edit soal
+        public function editQuestion($id)
+        {
+            $question = Question::findOrFail($id);
+            $materials = Material::all();
+            return view('admin.questions.edit', compact('question', 'materials'));
+        }
     
     // Hapus soal
     public function destroyQuestion($id) {
