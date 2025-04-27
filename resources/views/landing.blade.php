@@ -59,7 +59,7 @@
                         Platform pembelajaran digital yang memudahkan Anda memahami ajaran Islam dengan materi berkualitas dan metode yang interaktif.
                     </p>
                     <div class="flex space-x-4">
-                        <a href="#" class="bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-medium hover:bg-blue-700 transition duration-150 ease-in-out">
+                        <a href="{{ auth()->check() ? '/user/home' : '/login' }}" class="bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-medium hover:bg-blue-700 transition duration-150 ease-in-out">
                             Mulai Belajar
                         </a>
                         <a href="#" class="border border-blue-600 text-blue-600 px-6 py-3 rounded-lg text-lg font-medium hover:bg-blue-50 transition duration-150 ease-in-out">
