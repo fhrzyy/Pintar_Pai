@@ -70,7 +70,7 @@
                 </div>
             </nav>
 
-            <!-- User Profile -->
+                <!-- User Profile -->
             <div class="absolute bottom-0 w-full">
                 <div class="px-4 py-4 bg-blue-900">
                     <div class="flex items-center space-x-3">
@@ -80,9 +80,17 @@
                             </svg>
                         </div>
                         <div class="flex-1">
-                            <h3 class="text-sm font-medium text-white">Admin</h3>
-                            <p class="text-xs text-blue-200">admin@pintar-pai.com</p>
+                            <h3 class="text-sm font-medium text-white">{{ Auth::user()->name }}</h3>
+                            <p class="text-xs text-blue-200">{{ Auth::user()->email }}</p>
                         </div>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="p-2 hover:bg-blue-700 rounded-lg">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                </svg>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-gray-50 font-sans">
     <div class="flex min-h-screen">
         <!-- Sidebar -->
@@ -25,10 +27,10 @@
                             <svg class="w-6 h-6 text-indigo-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
                             </svg>
-                        </div>  
+                        </div>
                         <div>
-                            <h3 class="font-medium">M.Fahrur Rozi</h3>
-                            <p class="text-xs text-indigo-200">Siswa</p>   
+                            <h3 class="font-medium">{{ Auth::user()->name }}</h3>
+                            <p class="text-xs text-indigo-200">Siswa</p>
                         </div>
 
                     </div>
@@ -47,9 +49,9 @@
                         </a>
                     </li>
                 </ul>
-            <p class="text-xs text-indigo-200 font-semibold px-2 mb-2">MAIN MENU</p>
+                <p class="text-xs text-indigo-200 font-semibold px-2 mb-2">MAIN MENU</p>
                 <ul class="space-y-2">
-                <li class="transition-all duration-200 hover:bg-white/10 rounded-xl">
+                    <li class="transition-all duration-200 hover:bg-white/10 rounded-xl">
                         <a href="{{ route('user.materials.index') }}" class="flex items-center p-3 text-white group">
                             <div class="bg-white/10 p-2 rounded-lg mr-3 group-hover:bg-white group-hover:text-indigo-600 transition-all duration-200">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -72,7 +74,7 @@
                         </a>
                     </li>
                 </ul>
-                
+
                 <p class="text-xs text-indigo-200 font-semibold px-2 mt-6 mb-2">ACCOUNT</p>
                 <ul class="space-y-2">
                     <li class="transition-all duration-200 hover:bg-white/10 rounded-xl">
@@ -87,14 +89,17 @@
                         </a>
                     </li>
                     <li class="transition-all duration-200 hover:bg-white/10 rounded-xl">
-                        <a href="#" class="flex items-center p-3 text-white group">
-                            <div class="bg-white/10 p-2 rounded-lg mr-3 group-hover:bg-white group-hover:text-red-600 transition-all duration-200">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-                                </svg>
-                            </div>
-                            <span class="font-medium">Logout</span>
-                        </a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="w-full flex items-center p-3 text-white group">
+                                <div class="bg-white/10 p-2 rounded-lg mr-3 group-hover:bg-white group-hover:text-red-600 transition-all duration-200">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                                    </svg>
+                                </div>
+                                <span class="font-medium">Logout</span>
+                            </button>
+                        </form>
                     </li>
                 </ul>
             </nav>
@@ -106,4 +111,5 @@
         </main>
     </div>
 </body>
+
 </html>

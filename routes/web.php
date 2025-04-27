@@ -3,12 +3,23 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
 
 // Landing page
 Route::get('/', [LandingController::class, 'index'])->name('landing');
 
-// Admin routes (tanpa autentikasi)
-Route::prefix('admin')->group(function () {
+// Auth Routes
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/register', [AuthController::class, 'registerForm'])->name('register');
+    Route::post('/register', [AuthController::class, 'register']);
+});
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+
+// Admin routes (dengan autentikasi)
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/home', [AdminController::class, 'home'])->name('admin.home');
 
     // Materi
@@ -28,8 +39,8 @@ Route::prefix('admin')->group(function () {
     Route::delete('/questions/{id}', [AdminController::class, 'destroyQuestion'])->name('admin.questions.destroy');
 });
 
-// User routes (tanpa autentikasi)
-Route::prefix('user')->group(function () {
+// User routes (dengan autentikasi)
+Route::prefix('user')->middleware(['auth', 'user'])->group(function () {
     Route::get('/home', [UserController::class, 'home'])->name('user.home');
     
     // Materi

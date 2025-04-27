@@ -40,8 +40,8 @@
                 </div>
                 <!-- Auth Buttons -->
                 <div class="flex items-center space-x-4">
-                    <a href="#" class="text-blue-600 hover:text-blue-700 px-3 py-2 rounded-md text-sm font-medium">Masuk</a>
-                    <a href="#" class="bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">Daftar</a>
+                    <a href="/login" class="text-blue-600 hover:text-blue-700 px-3 py-2 rounded-md text-sm font-medium">Masuk</a>
+                    <a href="/register" class="bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">Daftar</a>
                 </div>
             </div>
         </div>
