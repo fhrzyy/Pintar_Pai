@@ -3,25 +3,71 @@
 @section('title', 'Detail Materi - {{ $material->title }}')
 
 @section('content')
-    <div class="container mx-auto px-4">
-        <div class="bg-white rounded-lg shadow-md">
-            <div class="bg-gradient-to-b from-indigo-600 to-purple-700 text-white p-4 rounded-t-lg">
-                <!-- bg-gradient-to-b from-indigo-600 to-purple-700 -->
-                <h3 class="text-xl font-bold m-0">{{ $material->title }}</h3>
-            </div>
+    <div class="container mx-auto px-4 py-6">
+        <div class="mb-4">
+            <h1 class="text-2xl font-bold text-indigo-600">{{ $material->title }}</h1>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-sm">
             <div class="p-6">
-                <h5 class="text-lg font-semibold mb-4">Detail Materi</h5>
-                <p class="mb-3"><span class="font-bold">Judul:</span> {{ $material->title }}</p>
-                <p class="mb-3"><span class="font-bold">Tipe File:</span> {{ strtoupper(pathinfo($material->file_path, PATHINFO_EXTENSION)) }}</p>
-                <p class="mb-4"><span class="font-bold">File:</span> 
-                    <a href="{{ asset('storage/' . $material->file_path) }}" target="_blank" class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700">
-                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/>
-                        </svg>
-                        Unduh
-                    </a>
-                </p>
-                <a href="{{ route('user.materials.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded hover:bg-gray-300">Kembali</a>
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <p class="text-sm text-gray-600">Tipe File: <span class="font-semibold">{{ strtoupper(pathinfo($material->file_path, PATHINFO_EXTENSION)) }}</span></p>
+                    </div>
+                    <div class="flex gap-2">
+                        <a href="{{ route('user.materials.index') }}" 
+                           class="px-4 py-2 text-sm bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors">
+                            Kembali
+                        </a>
+                        <a href="{{ asset('storage/' . $material->file_path) }}" 
+                           class="px-4 py-2 text-sm bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                            </svg>
+                            Unduh
+                        </a>
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-lg">
+                    @php
+                        $extension = strtolower(pathinfo($material->file_path, PATHINFO_EXTENSION));
+                    @endphp
+
+                    @if($extension == 'pdf')
+                        <div class="bg-gray-50 p-2 rounded-t-lg border-b flex justify-between items-center">
+                            <span class="text-sm text-gray-600">PDF Viewer</span>
+                            <div class="flex gap-2">
+                                <button class="p-1 hover:bg-gray-200 rounded">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <iframe 
+                            src="{{ asset('storage/' . $material->file_path) }}#toolbar=0" 
+                            class="w-full h-[800px]"
+                            frameborder="0">
+                        </iframe>
+                    @elseif(in_array($extension, ['doc', 'docx']))
+                        <div class="bg-gray-50 p-2 rounded-t-lg border-b">
+                            <span class="text-sm text-gray-600">Document Viewer</span>
+                        </div>
+                        <iframe 
+                            src="https://view.officeapps.live.com/op/embed.aspx?src={{ urlencode(asset('storage/' . $material->file_path)) }}"
+                            class="w-full h-[800px]" 
+                            frameborder="0">
+                        </iframe>
+                    @else
+                        <div class="p-8 text-center text-gray-500">
+                            <svg class="w-16 h-16 mx-auto mb-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                            <p>Preview tidak tersedia untuk format file ini</p>
+                        </div>
+                    @endif
+                </div>
             </div>
         </div>
     </div>
