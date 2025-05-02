@@ -14,13 +14,13 @@
                     <div class="mb-8 pb-6 border-b border-gray-200 last:border-0">
                         <h5 class="text-lg mb-4">{{ $index + 1 }}. {{ $question->question_text }}</h5>
                         <div class="space-y-3 mb-6">
-                            @foreach ($question->options as $option)
+                            @foreach ($question->options as $key => $option)
                                 <div class="flex items-center">
                                     <input class="form-radio h-4 w-4 text-blue-600" 
                                            type="radio" 
                                            name="answers[{{ $question->id }}]" 
                                            id="question_{{ $question->id }}_option_{{ $loop->index }}" 
-                                           value="{{ $option }}" 
+                                           value="{{ chr(65 + $loop->index) }}" 
                                            required>
                                     <label class="ml-2 text-gray-700" 
                                            for="question_{{ $question->id }}_option_{{ $loop->index }}">

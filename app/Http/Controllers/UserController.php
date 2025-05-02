@@ -29,7 +29,7 @@ class UserController extends Controller
         $material = Material::findOrFail($id);
         return view('user.materials.show', compact('material'));
     }
-    
+
     // Halaman Pilih Materi untuk Soal
     public function selectMaterialForQuestions()
     {
@@ -44,10 +44,10 @@ class UserController extends Controller
         $questions = Question::where('material_id', $material_id)->get();
         return view('user.questions.index', compact('questions', 'material'));
     }
-    
-    
+
+
     // Halaman Mengerjakan Soal
-        public function showQuestion($material_id)
+    public function showQuestion($material_id)
     {
         $material = Material::findOrFail($material_id);
         $questions = Question::where('material_id', $material_id)->get();
@@ -55,30 +55,30 @@ class UserController extends Controller
     }
 
     // Proses Jawaban User
-               public function submitAnswer(Request $request, $material_id)
-        {
-            $answers = $request->input('answers');
-            $results = [];
-            $totalCorrect = 0;
-            
-            foreach($answers as $question_id => $userAnswer) {
-                $question = Question::findOrFail($question_id);
-                $isCorrect = $userAnswer === $question->correct_answer;
-                if($isCorrect) {
-                    $totalCorrect++;
-                }
-                $results[] = [
-                    'question' => $question,
-                    'userAnswer' => $userAnswer,
-                    'isCorrect' => $isCorrect
-                ];
+    public function submitAnswer(Request $request, $material_id)
+    {
+        $answers = $request->input('answers');
+        $results = [];
+        $totalCorrect = 0;
+
+        foreach ($answers as $question_id => $userAnswer) {
+            $question = Question::findOrFail($question_id);
+            $isCorrect = $userAnswer === $question->correct_answer;
+            if ($isCorrect) {
+                $totalCorrect++;
             }
-        
-            return view('user.questions.result', [
-                'results' => $results,
-                'totalQuestions' => count($answers),
-                'totalCorrect' => $totalCorrect,
-                'material_id' => $material_id
-            ]);
+            $results[] = [
+                'question' => $question,
+                'userAnswer' => $userAnswer,
+                'isCorrect' => $isCorrect
+            ];
         }
+
+        return view('user.questions.result', [
+            'results' => $results,
+            'totalQuestions' => count($answers),
+            'totalCorrect' => $totalCorrect,
+            'material_id' => $material_id
+        ]);
+    }
 }
