@@ -78,17 +78,6 @@
                 <p class="text-xs text-indigo-200 font-semibold px-2 mt-6 mb-2">ACCOUNT</p>
                 <ul class="space-y-2">
                     <li class="transition-all duration-200 hover:bg-white/10 rounded-xl">
-                        <a href="#" class="flex items-center p-3 text-white group">
-                            <div class="bg-white/10 p-2 rounded-lg mr-3 group-hover:bg-white group-hover:text-indigo-600 transition-all duration-200">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                </svg>
-                            </div>
-                            <span class="font-medium">Settings</span>
-                        </a>
-                    </li>
-                    <li class="transition-all duration-200 hover:bg-white/10 rounded-xl">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit" class="w-full flex items-center p-3 text-white group">
