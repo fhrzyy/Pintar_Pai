@@ -128,7 +128,7 @@
                             <span class="text-white text-lg">{{ substr(Auth::user()->name, 0, 1) }}</span>
                         </div>
                         <div class="flex-1">
-                            <p class="text-sm text-white/60">Admin</p>
+                            <p class="text-sm text-white/60">Guru</p>
                             <p class="text-sm text-white">{{ Auth::user()->name }}</p>
                         </div>
                         <form method="POST" action="{{ route('logout') }}">

@@ -11,7 +11,7 @@ class Question extends Model
     protected $casts = [
         'options' => 'array',
     ];
-
+    
     public function material()
     {
         return $this->belongsTo(Material::class);
