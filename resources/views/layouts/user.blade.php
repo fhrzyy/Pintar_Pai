@@ -11,13 +11,14 @@
 <body class="bg-gray-50 font-sans">
     <div class="flex min-h-screen">
         <!-- Sidebar -->
+        <!-- w-72 h-screen bg-gradient-to-b from-indigo-600 to-purple-700 text-white shadow-xl fixed -->
+         <!-- w-72 h-screen bg-blue-700 text-white shadow-xl fixed -->
         <aside class="w-72 h-screen bg-gradient-to-b from-indigo-600 to-purple-700 text-white shadow-xl fixed">
-            <header class="p-6 border-b border-indigo-500/30">
+            <header class="p-2 border-b border-indigo-500/30">
                 <h2 class="text-2xl font-bold tracking-tight flex items-center">
-                    <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
-                    </svg>
-                    Pintar Pai
+                <div class="flex items-center gap-0">
+                    <img src="{{ asset('img/Lms-Pai/LogoGix.png') }}" alt="Logo" class="w-35 h-20 rounded-full">
+                </div>
                 </h2>
             </header>
             <div class="p-4">

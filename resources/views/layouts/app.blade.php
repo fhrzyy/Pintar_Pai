@@ -18,11 +18,8 @@
         <div class="w-64 fixed h-full shadow-lg sidebar-gradient">
             <!-- Logo Section -->
             <div class="flex items-center px-6 h-16">
-                <div class="flex items-center gap-2">
-                    <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 4L2 20h20L12 4z"/>
-                    </svg>
-                    <span class="text-2xl font-bold text-white">Pintar Pai</span>
+            <div class="flex items-center gap-0">
+                    <img src="{{ asset('img/Lms-Pai/LogoGix.png') }}" alt="Logo" class="w-35 h-20 rounded-full">
                 </div>
             </div>
 

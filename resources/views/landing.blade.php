@@ -12,6 +12,24 @@
         body {
             font-family: 'Poppins', sans-serif;
         }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .faq-answer.active {
+            max-height: 200px;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-icon.active {
+            transform: rotate(180deg);
+        }
     </style>
 </head>
 
@@ -27,29 +45,29 @@
                     </div>
                     <!-- Menu -->
                     <div class="hidden md:ml-6 md:flex md:space-x-8">
-                        <a href="#" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-blue-600 border-b-2 border-blue-600">
+                        <a href="#home" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-blue-600 hover:border-blue-600">
                             Home
                         </a>
-                        <a href="#" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-blue-600 hover:border-blue-600">
+                        <a href="#about" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-blue-600 hover:border-blue-600">
                             About
                         </a>
-                        <a href="#" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-blue-600 hover:border-blue-600">
+                        <a href="#faq" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-blue-600 hover:border-blue-600">
                             FAQ
                         </a>
                     </div>
                 </div>
                 <!-- Auth Buttons -->
                 <div class="flex items-center space-x-4">
-                    <a href="/login" class="text-blue-600 hover:text-blue-700 px-3 py-2 rounded-md text-sm font-medium">Masuk</a>
-                    <a href="/register" class="bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">Daftar</a>
+                    <a href="/login" class="text-indigo-600 to-purple-700 hover:text-blue-700 px-3 py-2 rounded-md text-sm font-medium">Masuk</a>
+                    <a href="/register" class="bg-gradient-to-b from-indigo-600 to-purple-700 px-4 py-2 rounded-md text-sm text-white font-medium transition duration-150 ease-in-out">Daftar</a>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <div class="pt-24 bg-gradient-to-b from-blue-50 to-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+    <div id="home" class="pt-10 bg-gradient-to-b from-blue-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-15">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div>
                     <h1 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
@@ -59,152 +77,293 @@
                         Platform pembelajaran digital yang memudahkan Anda memahami ajaran Islam dengan materi berkualitas dan metode yang interaktif.
                     </p>
                     <div class="flex space-x-4">
-                        <a href="{{ auth()->check() ? '/user/home' : '/login' }}" class="bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-medium hover:bg-blue-700 transition duration-150 ease-in-out">
+                        <a href="{{ auth()->check() ? '/user/home' : '/login' }}" class="bg-gradient-to-b from-indigo-600 to-purple-700 text-white px-6 py-3 rounded-lg text-lg font-medium hover:bg-blue-700 transition duration-150 ease-in-out">
                             Mulai Belajar
                         </a>
-                        <a href="#" class="border border-blue-600 text-blue-600 px-6 py-3 rounded-lg text-lg font-medium hover:bg-blue-50 transition duration-150 ease-in-out">
+                        <a href="#" class="border border-indigo-600 text-indigo-600 px-6 py-3 rounded-lg text-lg font-medium hover:bg-indigo-50 transition duration-150 ease-in-out">
                             Pelajari Lebih Lanjut
                         </a>
                     </div>
                 </div>
                 <div class="hidden md:block">
-                    <img src="{{ asset('img/Lms-Pai/Info4.png') }}" alt="Hero Image">
+                    <img src="{{ asset('img/Lms-Pai/Header_1.png') }}" alt="Hero Image">
                 </div>
             </div>
         </div>
     </div>
 
-    <section class="py-20 bg-gray-50">
+    <!-- About Pintar PAI -->
+    <section id="about" class="py-20 bg-white overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <!-- Ilustrasi & Visual -->
+                <div class="lg:w-1/2 relative">
+                    <div class="relative z-10">
+                        <div class="w-full h-96 bg-gradient-to-br from-indigo-100 to-blue-50 rounded-3xl overflow-hidden relative">
+                            <!-- Abstract Shape Elements -->
+                            <div class="absolute top-10 left-10 w-20 h-20 bg-blue-500 opacity-20 rounded-full"></div>
+                            <div class="absolute bottom-20 right-10 w-16 h-16 bg-indigo-500 opacity-20 rounded-full"></div>
+                            <div class="absolute top-1/2 left-1/3 w-24 h-24 bg-purple-500 opacity-10 rounded-full"></div>
+
+                            <!-- Main Illustration - Icon Cluster -->
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="grid grid-cols-3 gap-4 transform rotate-12">
+                                    <div class="w-16 h-16 bg-blue-500 rounded-xl flex items-center justify-center text-white">
+                                        <i class="fas fa-book text-2xl"></i>
+                                    </div>
+                                    <div class="w-16 h-16 bg-indigo-600 rounded-xl flex items-center justify-center text-white">
+                                        <i class="fas fa-graduation-cap text-2xl"></i>
+                                    </div>
+                                    <div class="w-16 h-16 bg-purple-500 rounded-xl flex items-center justify-center text-white">
+                                        <i class="fas fa-mosque text-2xl"></i>
+                                    </div>
+                                    <div class="w-16 h-16 bg-emerald-500 rounded-xl flex items-center justify-center text-white">
+                                        <i class="fas fa-star-and-crescent text-2xl"></i>
+                                    </div>
+                                    <div class="w-16 h-16 bg-yellow-500 rounded-xl flex items-center justify-center text-white">
+                                        <i class="fas fa-pray text-2xl"></i>
+                                    </div>
+                                    <div class="w-16 h-16 bg-red-500 rounded-xl flex items-center justify-center text-white">
+                                        <i class="fas fa-quran text-2xl"></i>
+                                    </div>
+                                    <div class="w-16 h-16 bg-pink-500 rounded-xl flex items-center justify-center text-white">
+                                        <i class="fas fa-heart text-2xl"></i>
+                                    </div>
+                                    <div class="w-16 h-16 bg-teal-500 rounded-xl flex items-center justify-center text-white">
+                                        <i class="fas fa-hands text-2xl"></i>
+                                    </div>
+                                    <div class="w-16 h-16 bg-blue-600 rounded-xl flex items-center justify-center text-white">
+                                        <i class="fas fa-clipboard-check text-2xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Accent Elements -->
+                    <div class="absolute -bottom-10 -left-10 w-36 h-36 bg-indigo-500 opacity-10 rounded-full blur-xl"></div>
+                    <div class="absolute -top-10 -right-10 w-48 h-48 bg-blue-500 opacity-10 rounded-full blur-xl"></div>
+
+                    <!-- Stats Cards -->
+                    <div class="absolute -bottom-5 right-5 bg-white rounded-xl shadow-xl p-4 w-48">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-users text-blue-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500">Pembelajar Aktif</p>
+                                <p class="font-bold text-gray-800">12,000+</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="absolute -top-5 left-10 bg-white rounded-xl shadow-xl p-4 w-48">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-award text-indigo-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500">Rating Kami</p>
+                                <p class="font-bold text-gray-800">4.9/5.0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="lg:w-1/2">
+                    <div class="mb-6">
+                        <span class="text-indigo-600 font-semibold text-sm uppercase tracking-wider">Tentang Kami</span>
+                        <h2 class="text-4xl font-bold mt-2 mb-4 text-gray-800">Pintar PAI: Platform Pendidikan Agama Islam Modern</h2>
+                    </div>
+
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Pintar PAI adalah platform pembelajaran digital yang dirancang untuk memudahkan siapa saja memahami dan mendalami ajaran Islam dengan metode modern, interaktif, dan menyenangkan. Kami memadukan teknologi terkini dengan konten pendidikan berkualitas untuk menghadirkan pengalaman belajar Islam yang relevan dengan kehidupan modern.
+                    </p>
+
+                    <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="flex items-start">
+                        <div class="mr-4 mt-1">
+                            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-check text-blue-600"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800 mb-1">Kurikulum Terstruktur</h3>
+                            <p class="text-gray-600 text-sm">Materi belajar yang disusun secara sistematis dari pemula hingga lanjutan</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="mr-4 mt-1">
+                            <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-video text-purple-600"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800 mb-1">Konten Interaktif</h3>
+                            <p class="text-gray-600 text-sm">Video, infografis, dan quiz interaktif untuk memperkuat pemahaman</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="mr-4 mt-1">
+                            <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-user-friends text-green-600"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800 mb-1">Komunitas Pendukung</h3>
+                            <p class="text-gray-600 text-sm">Forum diskusi dan bimbingan langsung dari para ustadz terpercaya</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="mr-4 mt-1">
+                            <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-mobile-alt text-amber-600"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800 mb-1">Akses Fleksibel</h3>
+                            <p class="text-gray-600 text-sm">Belajar kapan saja dan di mana saja dari berbagai perangkat</p>
+                        </div>
+                    </div>
+                </div> -->
+
+                    <!-- <div class="flex items-center space-x-4">
+                    <a href="#" class="px-6 py-3 bg-indigo-600 text-white font-medium rounded-xl transition-all duration-300 hover:bg-indigo-700 shadow-md hover:shadow-lg">
+                        Mulai Belajar
+                    </a>
+                    <a href="#" class="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-xl transition-all duration-300 hover:bg-gray-50 flex items-center">
+                        <i class="fas fa-play-circle mr-2 text-indigo-600"></i> Pelajari Lebih Lanjut
+                    </a>
+                </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Unggulan -->
+    <section class="py-20 bg-gray-50 overflow-hidden">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">Kurikulum Terpadu</span>
+                <span class="text-indigo-600 font-semibold text-sm uppercase tracking-wider">Kurikulum Terpadu</span>
                 <h2 class="text-4xl font-bold mt-2 mb-4 text-gray-800">Program Unggulan Kami</h2>
                 <p class="max-w-2xl mx-auto text-gray-600">Berbagai program belajar yang dirancang khusus untuk membantu Anda memahami dan mengamalkan ajaran Islam dengan mudah dan menyenangkan</p>
             </div>
 
-            <!-- Timeline Style Modules -->
-            <div class="relative">
-                <!-- Vertical Line -->
-                <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-blue-400 to-emerald-400"></div>
-
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
                 <!-- Module 1 -->
-                <div class="relative mb-16">
-                    <div class="md:flex items-center">
-                        <div class="md:w-1/2 md:pr-8 mb-8 md:mb-0 md:text-right">
-                            <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-t-4 border-blue-500">
-                                <span class="inline-block px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm font-medium mb-3">Pemula</span>
-                                <h3 class="text-2xl font-bold mb-3 text-gray-800">Dasar-Dasar Islam</h3>
-                                <p class="text-gray-600 mb-4">Program pengenalan dasar ajaran Islam untuk pemula, mencakup akidah, ibadah, dan akhlak dalam kehidupan sehari-hari.</p>
-                                <div class="flex md:justify-end">
-                                    <span class="mr-2 text-sm text-gray-500"><i class="fas fa-book mr-1"></i> 24 Modul</span>
-                                    <span class="mr-2 text-sm text-gray-500"><i class="fas fa-clock mr-1"></i> 8 Minggu</span>
-                                    <span class="text-sm text-gray-500"><i class="fas fa-users mr-1"></i> 5000+ Pelajar</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="hidden md:flex justify-center absolute left-1/2 transform -translate-x-1/2">
-                            <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center text-white text-2xl shadow-lg z-10">
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-105 -z-10"></div>
+                    <div class="flex bg-white rounded-2xl p-6 transition-all duration-500 group-hover:translate-y-[-10px] group-hover:translate-x-[-10px] group-hover:shadow-2xl">
+                        <div class="mr-6">
+                            <div class="w-20 h-20 bg-blue-500 rounded-2xl flex items-center justify-center text-white text-3xl transform -rotate-6 group-hover:rotate-0 transition-all duration-300">
                                 <i class="fas fa-star"></i>
                             </div>
                         </div>
-
-                        <div class="md:w-1/2 md:pl-8">
-                            <!-- Empty div for layout -->
+                        <div class="flex-1">
+                            <div class="flex items-center mb-3">
+                                <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm font-medium">Pemula</span>
+                                <div class="flex items-center ml-auto space-x-2 text-sm text-gray-500">
+                                    <span class="inline-flex items-center"><i class="fas fa-users mr-1"></i> 5000+</span>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Dasar-Dasar Islam</h3>
+                            <p class="text-gray-600 mb-4">Program pengenalan dasar ajaran Islam untuk pemula.</p>
+                            <div class="flex items-center text-sm text-gray-500">
+                                <span class="flex items-center mr-4"><i class="fas fa-book mr-1"></i> 24 Modul</span>
+                                <span class="flex items-center"><i class="fas fa-clock mr-1"></i> 8 Minggu</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Module 2 -->
-                <div class="relative mb-16">
-                    <div class="md:flex items-center">
-                        <div class="md:w-1/2 md:pr-8 mb-8 md:mb-0">
-                            <!-- Empty div for layout -->
-                        </div>
-
-                        <div class="hidden md:flex justify-center absolute left-1/2 transform -translate-x-1/2">
-                            <div class="w-16 h-16 bg-indigo-500 rounded-full flex items-center justify-center text-white text-2xl shadow-lg z-10">
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-105 -z-10"></div>
+                    <div class="flex bg-white rounded-2xl p-6 transition-all duration-500 group-hover:translate-y-[-10px] group-hover:translate-x-[-10px] group-hover:shadow-2xl">
+                        <div class="mr-6">
+                            <div class="w-20 h-20 bg-indigo-500 rounded-2xl flex items-center justify-center text-white text-3xl transform rotate-6 group-hover:rotate-0 transition-all duration-300">
                                 <i class="fas fa-book-open"></i>
                             </div>
                         </div>
-
-                        <div class="md:w-1/2 md:pl-8">
-                            <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-t-4 border-indigo-500">
-                                <span class="inline-block px-3 py-1 bg-indigo-100 text-indigo-600 rounded-full text-sm font-medium mb-3">Menengah</span>
-                                <h3 class="text-2xl font-bold mb-3 text-gray-800">Kajian Al-Qur'an Tematik</h3>
-                                <p class="text-gray-600 mb-4">Mempelajari Al-Qur'an secara tematik dengan pendekatan modern, disertai tafsir dan implementasi dalam kehidupan.</p>
-                                <div class="flex">
-                                    <span class="mr-2 text-sm text-gray-500"><i class="fas fa-book mr-1"></i> 36 Modul</span>
-                                    <span class="mr-2 text-sm text-gray-500"><i class="fas fa-clock mr-1"></i> 12 Minggu</span>
-                                    <span class="text-sm text-gray-500"><i class="fas fa-users mr-1"></i> 3200+ Pelajar</span>
+                        <div class="flex-1">
+                            <div class="flex items-center mb-3">
+                                <span class="px-3 py-1 bg-indigo-100 text-indigo-600 rounded-full text-sm font-medium">Menengah</span>
+                                <div class="flex items-center ml-auto space-x-2 text-sm text-gray-500">
+                                    <span class="inline-flex items-center"><i class="fas fa-users mr-1"></i> 3200+</span>
                                 </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Kajian Al-Qur'an Tematik</h3>
+                            <p class="text-gray-600 mb-4">Mempelajari Al-Qur'an dengan pendekatan modern.</p>
+                            <div class="flex items-center text-sm text-gray-500">
+                                <span class="flex items-center mr-4"><i class="fas fa-book mr-1"></i> 36 Modul</span>
+                                <span class="flex items-center"><i class="fas fa-clock mr-1"></i> 12 Minggu</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Module 3 -->
-                <div class="relative mb-16">
-                    <div class="md:flex items-center">
-                        <div class="md:w-1/2 md:pr-8 mb-8 md:mb-0 md:text-right">
-                            <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-t-4 border-purple-500">
-                                <span class="inline-block px-3 py-1 bg-purple-100 text-purple-600 rounded-full text-sm font-medium mb-3">Lanjutan</span>
-                                <h3 class="text-2xl font-bold mb-3 text-gray-800">Fikih Kontemporer</h3>
-                                <p class="text-gray-600 mb-4">Kajian fikih yang mengulas isu-isu kontemporer dalam perspektif Islam dengan pendekatan moderat dan komprehensif.</p>
-                                <div class="flex md:justify-end">
-                                    <span class="mr-2 text-sm text-gray-500"><i class="fas fa-book mr-1"></i> 48 Modul</span>
-                                    <span class="mr-2 text-sm text-gray-500"><i class="fas fa-clock mr-1"></i> 16 Minggu</span>
-                                    <span class="text-sm text-gray-500"><i class="fas fa-users mr-1"></i> 1800+ Pelajar</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="hidden md:flex justify-center absolute left-1/2 transform -translate-x-1/2">
-                            <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center text-white text-2xl shadow-lg z-10">
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-105 -z-10"></div>
+                    <div class="flex bg-white rounded-2xl p-6 transition-all duration-500 group-hover:translate-y-[-10px] group-hover:translate-x-[-10px] group-hover:shadow-2xl">
+                        <div class="mr-6">
+                            <div class="w-20 h-20 bg-purple-500 rounded-2xl flex items-center justify-center text-white text-3xl transform -rotate-6 group-hover:rotate-0 transition-all duration-300">
                                 <i class="fas fa-balance-scale"></i>
                             </div>
                         </div>
-
-                        <div class="md:w-1/2 md:pl-8">
-                            <!-- Empty div for layout -->
+                        <div class="flex-1">
+                            <div class="flex items-center mb-3">
+                                <span class="px-3 py-1 bg-purple-100 text-purple-600 rounded-full text-sm font-medium">Lanjutan</span>
+                                <div class="flex items-center ml-auto space-x-2 text-sm text-gray-500">
+                                    <span class="inline-flex items-center"><i class="fas fa-users mr-1"></i> 1800+</span>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Fikih Kontemporer</h3>
+                            <p class="text-gray-600 mb-4">Kajian fikih dengan pendekatan moderat.</p>
+                            <div class="flex items-center text-sm text-gray-500">
+                                <span class="flex items-center mr-4"><i class="fas fa-book mr-1"></i> 48 Modul</span>
+                                <span class="flex items-center"><i class="fas fa-clock mr-1"></i> 16 Minggu</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Module 4 -->
-                <div class="relative">
-                    <div class="md:flex items-center">
-                        <div class="md:w-1/2 md:pr-8 mb-8 md:mb-0">
-                            <!-- Empty div for layout -->
-                        </div>
-
-                        <div class="hidden md:flex justify-center absolute left-1/2 transform -translate-x-1/2">
-                            <div class="w-16 h-16 bg-emerald-500 rounded-full flex items-center justify-center text-white text-2xl shadow-lg z-10">
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-105 -z-10"></div>
+                    <div class="flex bg-white rounded-2xl p-6 transition-all duration-500 group-hover:translate-y-[-10px] group-hover:translate-x-[-10px] group-hover:shadow-2xl">
+                        <div class="mr-6">
+                            <div class="w-20 h-20 bg-emerald-500 rounded-2xl flex items-center justify-center text-white text-3xl transform rotate-6 group-hover:rotate-0 transition-all duration-300">
                                 <i class="fas fa-hands-helping"></i>
                             </div>
                         </div>
-
-                        <div class="md:w-1/2 md:pl-8">
-                            <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-t-4 border-emerald-500">
-                                <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm font-medium mb-3">Spesial</span>
-                                <h3 class="text-2xl font-bold mb-3 text-gray-800">Islam & Masyarakat Modern</h3>
-                                <p class="text-gray-600 mb-4">Program khusus yang mengupas tuntas peran dan penerapan nilai-nilai Islam dalam konteks masyarakat modern.</p>
-                                <div class="flex">
-                                    <span class="mr-2 text-sm text-gray-500"><i class="fas fa-book mr-1"></i> 32 Modul</span>
-                                    <span class="mr-2 text-sm text-gray-500"><i class="fas fa-clock mr-1"></i> 12 Minggu</span>
-                                    <span class="text-sm text-gray-500"><i class="fas fa-users mr-1"></i> 2400+ Pelajar</span>
+                        <div class="flex-1">
+                            <div class="flex items-center mb-3">
+                                <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm font-medium">Spesial</span>
+                                <div class="flex items-center ml-auto space-x-2 text-sm text-gray-500">
+                                    <span class="inline-flex items-center"><i class="fas fa-users mr-1"></i> 2400+</span>
                                 </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Islam & Masyarakat Modern</h3>
+                            <p class="text-gray-600 mb-4">Program khusus tentang peran Islam modern.</p>
+                            <div class="flex items-center text-sm text-gray-500">
+                                <span class="flex items-center mr-4"><i class="fas fa-book mr-1"></i> 32 Modul</span>
+                                <span class="flex items-center"><i class="fas fa-clock mr-1"></i> 12 Minggu</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- CTA Button -->
+            <!-- CTA Button with enhanced styling -->
             <div class="text-center mt-16">
-                <a href="#" class="inline-flex items-center px-8 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
-                    Lihat Semua Program
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <a href="#" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105">
+                    <span class="mr-3">Lihat Semua Program</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                     </svg>
                 </a>
@@ -350,13 +509,56 @@
     </section>
 
     <!-- Call to Action -->
-    <section class="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+    <section class="py-16 bg-gradient-to-b from-indigo-600 to-purple-700 text-white">
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-3xl font-bold mb-6">Mulai Perjalanan Belajar Anda Hari Ini</h2>
             <p class="text-xl mb-8 max-w-2xl mx-auto">Bergabunglah dengan ribuan pelajar lainnya dan tingkatkan pemahaman Anda tentang ajaran Islam melalui platform modern kami.</p>
             <div class="flex flex-col md:flex-row justify-center items-center gap-4">
-                <a href="#" class="bg-white text-blue-600 font-semibold px-8 py-3 rounded-lg hover:bg-blue-50 transition duration-300">Daftar Gratis</a>
-                <a href="#" class="bg-transparent border-2 border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-white hover:text-blue-600 transition duration-300">Pelajari Lebih Lanjut</a>
+                <a href="#" class="bg-white text-indigo-600 font-semibold px-8 py-3 rounded-lg hover:bg-blue-50 transition duration-300">Daftar Gratis</a>
+                <a href="#" class="bg-transparent border-2 border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-white hover:text-indigo-600 transition duration-300">Pelajari Lebih Lanjut</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add this section before the footer -->
+    <section id="faq" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="text-indigo-600 font-semibold text-sm uppercase tracking-wider">FAQ</span>
+                <h2 class="text-4xl font-bold mt-2 mb-4 text-gray-800">Pertanyaan yang Sering Diajukan</h2>
+                <p class="max-w-2xl mx-auto text-gray-600">Temukan jawaban untuk pertanyaan-pertanyaan umum tentang Pintar PAI</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="border border-gray-200 rounded-lg">
+                    <button class="faq-button flex justify-between items-center w-full px-6 py-4 text-left hover:bg-gray-50 transition-colors">
+                        <span class="font-semibold text-gray-800">Apakah Pintar PAI berbayar?</span>
+                        <svg class="faq-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="px-6 pb-4">
+                            <p class="text-gray-600">Pintar PAI menyediakan konten gratis. Anda dapat mengakses materi secara gratis.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- FAQ Item 2 -->
+                <div class="border border-gray-200 rounded-lg">
+                    <button class="faq-button flex justify-between items-center w-full px-6 py-4 text-left hover:bg-gray-50 transition-colors">
+                        <span class="font-semibold text-gray-800">Siapa saja yang bisa menggunakan Pintar-Pai?</span>
+                        <svg class="faq-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="px-6 pb-4">
+                            <p class="text-gray-600">Pintar PAI ditargetkan untuk siswa/i SMK Negeri 6 Jember kelas 11 rpl 2</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -410,6 +612,35 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqButtons = document.querySelectorAll('.faq-button');
+
+            faqButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const answer = button.nextElementSibling;
+                    const icon = button.querySelector('.faq-icon');
+
+                    // Toggle active class
+                    answer.classList.toggle('active');
+                    icon.classList.toggle('active');
+
+                    // Close other FAQs
+                    faqButtons.forEach(otherButton => {
+                        if (otherButton !== button) {
+                            const otherAnswer = otherButton.nextElementSibling;
+                            const otherIcon = otherButton.querySelector('.faq-icon');
+                            otherAnswer.classList.remove('active');
+                            otherIcon.classList.remove('active');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+
 </body>
 
 </html>

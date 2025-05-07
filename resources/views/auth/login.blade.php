@@ -56,10 +56,12 @@
                 </div>
 
                 <button type="submit" 
-                    class="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 rounded-lg hover:opacity-90 transition-all duration-300 transform hover:scale-[1.02]">
+                    class="w-full bg-gradient-to-b from-indigo-600 to-purple-700 text-white py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-[1.02]">
                     <i class="fas fa-sign-in-alt mr-2"></i> Login
                 </button>
             </form>
+
+            <!-- bg-gradient-to-b from-indigo-600 to-purple-700 -->
 
             <p class="mt-8 text-center text-gray-600">
                 Belum Punya Akun? 
