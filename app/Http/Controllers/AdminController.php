@@ -168,5 +168,4 @@ class AdminController extends Controller {
 
         return redirect()->route('admin.questions.index')->with('success', 'Soal berhasil dihapus!');
     }
-
 }
