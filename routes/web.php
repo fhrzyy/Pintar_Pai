@@ -39,6 +39,8 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::delete('/questions/{id}', [AdminController::class, 'destroyQuestion'])->name('admin.questions.destroy');
 });
 
+// ...existing code...
+
 // User routes (dengan autentikasi)
 Route::prefix('user')->middleware(['auth', 'user'])->group(function () {
     Route::get('/home', [UserController::class, 'home'])->name('user.home');
@@ -47,13 +49,41 @@ Route::prefix('user')->middleware(['auth', 'user'])->group(function () {
     Route::get('/materials', [UserController::class, 'materials'])->name('user.materials.index');
     Route::get('/materials/{id}', [UserController::class, 'showMaterial'])->name('user.materials.show');
     
-    // Soal
+    // Soal dan Hasil
     Route::get('/questions/select-material', [UserController::class, 'selectMaterialForQuestions'])
         ->name('user.questions.select-material');
     Route::get('/questions/{material_id}', [UserController::class, 'index'])
         ->name('user.questions.index');
-    Route::get('/questions/{id}/show', [UserController::class, 'showQuestion'])
+    Route::get('/questions/{material_id}/show', [UserController::class, 'showQuestion'])
         ->name('user.questions.show');
-    Route::post('/questions/{id}/submit', [UserController::class, 'submitAnswer'])
+    Route::post('/questions/{material_id}/submit', [UserController::class, 'submitAnswer'])
         ->name('user.questions.submit');
+    
+    // Rute baru untuk remidi
+    Route::get('/questions/{material_id}/remedial', [UserController::class, 'showRemedial'])
+        ->name('user.questions.remedial');
+    Route::get('/results', [UserController::class, 'results'])
+        ->name('user.results.index');
+    Route::get('/results/{result_id}', [UserController::class, 'showResult'])
+        ->name('user.results.show');
 });
+
+// // User routes (dengan autentikasi)
+// Route::prefix('user')->middleware(['auth', 'user'])->group(function () {
+//     Route::get('/home', [UserController::class, 'home'])->name('user.home');
+    
+//     // Materi
+//     Route::get('/materials', [UserController::class, 'materials'])->name('user.materials.index');
+//     Route::get('/materials/{id}', [UserController::class, 'showMaterial'])->name('user.materials.show');
+    
+//     // Soal
+    
+//     Route::get('/questions/select-material', [UserController::class, 'selectMaterialForQuestions'])
+//         ->name('user.questions.select-material');
+//     Route::get('/questions/{material_id}', [UserController::class, 'index'])
+//         ->name('user.questions.index');
+//     Route::get('/questions/{id}/show', [UserController::class, 'showQuestion'])
+//         ->name('user.questions.show');
+//     Route::post('/questions/{id}/submit', [UserController::class, 'submitAnswer'])
+//         ->name('user.questions.submit');
+// });

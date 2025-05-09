@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Material;
 use App\Models\Question;
 use Illuminate\Http\Request;
+use App\Models\Result;
 
 class UserController extends Controller
 {
@@ -47,19 +48,38 @@ class UserController extends Controller
 
 
     // Halaman Mengerjakan Soal
-    public function showQuestion($material_id)
+        public function showQuestion($material_id)
     {
         $material = Material::findOrFail($material_id);
         $questions = Question::where('material_id', $material_id)->get();
-        return view('user.questions.show', compact('questions', 'material'));
+        
+        // Cek hasil terakhir siswa
+        $lastResult = Result::where('user_id', auth()->id())
+            ->where('material_id', $material_id)
+            ->latest()
+            ->first();
+    
+        $isRemedial = false;
+        
+        // Jika ada hasil sebelumnya dan nilai < 70
+        if ($lastResult && $lastResult->score < 70) {
+            $isRemedial = true;
+        }
+    
+        // Jika sudah remedial dan lulus (nilai >= 70), isRemedial = false
+        if ($lastResult && $lastResult->is_remedial && $lastResult->score >= 70) {
+            $isRemedial = false;
+        }
+    
+        return view('user.questions.show', compact('questions', 'material', 'isRemedial'));
     }
 
-    // Proses Jawaban User
     public function submitAnswer(Request $request, $material_id)
     {
         $answers = $request->input('answers');
-        $results = [];
+        $totalQuestions = count($answers);
         $totalCorrect = 0;
+        $results = [];
 
         foreach ($answers as $question_id => $userAnswer) {
             $question = Question::findOrFail($question_id);
@@ -74,11 +94,31 @@ class UserController extends Controller
             ];
         }
 
+        $score = ($totalCorrect / $totalQuestions) * 100;
+
+        // Simpan hasil
+        $result = Result::create([
+            'user_id' => auth()->id(),
+            'material_id' => $material_id,
+            'score' => $score,
+            'is_remedial' => $request->has('is_remedial'),
+            'attempt' => Result::where('user_id', auth()->id())
+                              ->where('material_id', $material_id)
+                              ->count() + 1
+        ]);
+
+        if ($score < 70) {
+            return redirect()
+                ->route('user.questions.show', $material_id)
+                ->with('warning', 'Nilai Anda dibawah 70. Silahkan kerjakan remedial.');
+        }
+
         return view('user.questions.result', [
             'results' => $results,
-            'totalQuestions' => count($answers),
+            'totalQuestions' => $totalQuestions,
             'totalCorrect' => $totalCorrect,
-            'material_id' => $material_id
+            'material_id' => $material_id,
+            'score' => $score
         ]);
     }
 }
