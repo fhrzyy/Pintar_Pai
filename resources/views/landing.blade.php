@@ -12,7 +12,13 @@
         body {
             font-family: 'Poppins', sans-serif;
         }
-
+        .hero-section {
+            background: linear-gradient(135deg, rgba(59, 58, 104, 0.28), rgba(0, 0, 0, 0.47)),
+                        url('img/Lms-Pai/dua.jpg') no-repeat center center;
+            background-size: cover;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            position: relative;
+        }
         .faq-answer {
             max-height: 0;
             overflow: hidden;
@@ -65,32 +71,28 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <div id="home" class="pt-10 bg-gradient-to-b from-blue-50 to-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-15">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
-                        Belajar Pendidikan Agama Islam dengan Cara yang Modern
-                    </h1>
-                    <p class="text-lg text-gray-600 mb-8">
-                        Platform pembelajaran digital yang memudahkan Anda memahami ajaran Islam dengan materi berkualitas dan metode yang interaktif.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="{{ auth()->check() ? '/user/home' : '/login' }}" class="bg-gradient-to-b from-indigo-600 to-purple-700 text-white px-6 py-3 rounded-lg text-lg font-medium hover:opacity-90 hover:shadow-lg hover:scale-105 transition duration-300 ease-in-out">
-                            Mulai Belajar
-                        </a>
-                        <a href="#" class="border border-indigo-600 text-indigo-600 px-6 py-3 rounded-lg text-lg font-medium hover:bg-indigo-50 transition duration-150 ease-in-out">
-                            Pelajari Lebih Lanjut
-                        </a>
-                    </div>
-                </div>
-                <div class="hidden md:block">
-                    <img src="{{ asset('img/Lms-Pai/Header_1.png') }}" alt="Hero Image">
-                </div>
-            </div>
+    <<!-- Hero Section -->
+<div id="home" class="hero-section relative bg-cover bg-center bg-no-repeat min-h-screen flex items-center justify-center text-center"
+    style="background:linear-gradient('to left,white,black'), url('{{ asset('img/Lms-Pai/Akidah.png') }}');">
+    <div class="rounded-xl p-10 max-w-3xl mx-auto w-full">
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+            Belajar Pendidikan Agama Islam dengan Cara yang Modern
+        </h1>
+        <p class="text-lg text-white mb-8">
+            Platform pembelajaran digital yang memudahkan Anda memahami ajaran Islam dengan materi berkualitas dan metode yang interaktif.
+        </p>
+        <div class="flex flex-col md:flex-row justify-center gap-4">
+            <a href="{{ auth()->check() ? '/user/home' : '/login' }}"
+                class="bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:shadow-lg hover:scale-105">
+                Mulai Belajar
+            </a>
+            <a href="#"
+                class="border-2 border-white text-white px-6 py-3 rounded-lg text-lg font-semibold">
+                Pelajari Lebih Lanjut
+            </a>
         </div>
     </div>
+</div>
 
     <!-- About Pintar PAI -->
     <section id="about" class="py-20 bg-white overflow-hidden">
@@ -143,31 +145,6 @@
                     <!-- Accent Elements -->
                     <div class="absolute -bottom-10 -left-10 w-36 h-36 bg-indigo-500 opacity-10 rounded-full blur-xl"></div>
                     <div class="absolute -top-10 -right-10 w-48 h-48 bg-blue-500 opacity-10 rounded-full blur-xl"></div>
-
-                    <!-- Stats Cards -->
-                    <div class="absolute -bottom-5 right-5 bg-white rounded-xl shadow-xl p-4 w-48">
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                                <i class="fas fa-users text-blue-600"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-gray-500">Pembelajar Aktif</p>
-                                <p class="font-bold text-gray-800">12,000+</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="absolute -top-5 left-10 bg-white rounded-xl shadow-xl p-4 w-48">
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center mr-3">
-                                <i class="fas fa-award text-indigo-600"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-gray-500">Rating Kami</p>
-                                <p class="font-bold text-gray-800">4.9/5.0</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Content -->
@@ -180,65 +157,6 @@
                     <p class="text-gray-600 mb-6 leading-relaxed">
                         Pintar PAI adalah platform pembelajaran digital yang dirancang untuk memudahkan siapa saja memahami dan mendalami ajaran Islam dengan metode modern, interaktif, dan menyenangkan. Kami memadukan teknologi terkini dengan konten pendidikan berkualitas untuk menghadirkan pengalaman belajar Islam yang relevan dengan kehidupan modern.
                     </p>
-
-                    <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <div class="flex items-start">
-                        <div class="mr-4 mt-1">
-                            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-check text-blue-600"></i>
-                            </div>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-800 mb-1">Kurikulum Terstruktur</h3>
-                            <p class="text-gray-600 text-sm">Materi belajar yang disusun secara sistematis dari pemula hingga lanjutan</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-start">
-                        <div class="mr-4 mt-1">
-                            <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-video text-purple-600"></i>
-                            </div>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-800 mb-1">Konten Interaktif</h3>
-                            <p class="text-gray-600 text-sm">Video, infografis, dan quiz interaktif untuk memperkuat pemahaman</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-start">
-                        <div class="mr-4 mt-1">
-                            <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-user-friends text-green-600"></i>
-                            </div>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-800 mb-1">Komunitas Pendukung</h3>
-                            <p class="text-gray-600 text-sm">Forum diskusi dan bimbingan langsung dari para ustadz terpercaya</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-start">
-                        <div class="mr-4 mt-1">
-                            <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-mobile-alt text-amber-600"></i>
-                            </div>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-800 mb-1">Akses Fleksibel</h3>
-                            <p class="text-gray-600 text-sm">Belajar kapan saja dan di mana saja dari berbagai perangkat</p>
-                        </div>
-                    </div>
-                </div> -->
-
-                    <!-- <div class="flex items-center space-x-4">
-                    <a href="#" class="px-6 py-3 bg-indigo-600 text-white font-medium rounded-xl transition-all duration-300 hover:bg-indigo-700 shadow-md hover:shadow-lg">
-                        Mulai Belajar
-                    </a>
-                    <a href="#" class="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-xl transition-all duration-300 hover:bg-gray-50 flex items-center">
-                        <i class="fas fa-play-circle mr-2 text-indigo-600"></i> Pelajari Lebih Lanjut
-                    </a>
-                </div> -->
                 </div>
             </div>
         </div>
@@ -642,5 +560,4 @@
 </body>
 
 </body>
-
 </html>
