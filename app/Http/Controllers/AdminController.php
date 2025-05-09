@@ -17,8 +17,8 @@ class AdminController extends Controller {
     
     // Menampilkan daftar materi
     public function index() {
-        $materials = Material::all();
-        return view('admin.materials.index', compact('materials'));
+       $materials = Material::latest()->paginate(10); // Menggunakan paginate() alih-alih get()
+    return view('admin.materials.index', compact('materials'));
     }
 
     // Form upload materi
