@@ -19,11 +19,11 @@
     </div>
 @endif
 
-    <!-- @if(session('warning'))
+    @if(session('warning'))
     <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4 mx-6 mt-4">
         {{ session('warning') }}
     </div>
-    @endif -->
+    @endif
 
     <div class="p-6">
         <form action="{{ route('user.questions.submit', $material->id) }}" method="POST">

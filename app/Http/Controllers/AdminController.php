@@ -92,8 +92,12 @@ class AdminController extends Controller {
 
     // Menampilkan daftar soal
     public function indexQuestion() {
-        $questions = Question::with('material')->get();
-        return view('admin.questions.index', compact('questions'));
+        $materials = Material::all(); // Ambil semua data materi
+        $questions = Question::with('material')
+                           ->latest()
+                           ->paginate(10);  
+
+        return view('admin.questions.index', compact('questions', 'materials'));
     }
 
     // Form tambah soal (diperbarui untuk multiple soal)
