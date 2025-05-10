@@ -14,9 +14,9 @@
         }
         .hero-section {
             background: linear-gradient(135deg, rgba(59, 58, 104, 0.28), rgba(0, 0, 0, 0.47)),
-                        url('img/Lms-Pai/dua.jpg') no-repeat center center;
+                        url('https://plus.unsplash.com/premium_photo-1678558953671-c0d8a2d00501?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center;
             background-size: cover;
-            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            /* clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%); */
             position: relative;
         }
         .faq-answer {
@@ -83,14 +83,40 @@
         </p>
         <div class="flex flex-col md:flex-row justify-center gap-4">
             <a href="{{ auth()->check() ? '/user/home' : '/login' }}"
-                class="bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:shadow-lg hover:scale-105">
-                Mulai Belajar
+            class="bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:shadow-lg transition-all duration-300"
+            id="startButton">
+            Mulai Belajar
             </a>
             <a href="#"
-                class="border-2 border-white text-white px-6 py-3 rounded-lg text-lg font-semibold">
-                Pelajari Lebih Lanjut
+            class="border-2 border-white text-white px-6 py-3 rounded-lg text-lg font-semibold transition-all duration-300"
+            id="learnButton">
+            Pelajari Lebih Lanjut
             </a>
         </div>
+        <script>
+            const startBtn = document.getElementById('startButton');
+            const learnBtn = document.getElementById('learnButton');
+
+            startBtn.addEventListener('mouseenter', () => {
+            startBtn.style.transform = 'translateY(-5px) scale(1.05)';
+            startBtn.style.boxShadow = '0 10px 20px rgba(79, 70, 229, 0.3)';
+            });
+
+            startBtn.addEventListener('mouseleave', () => {
+            startBtn.style.transform = 'translateY(0) scale(1)';
+            startBtn.style.boxShadow = 'none';
+            });
+
+            learnBtn.addEventListener('mouseenter', () => {
+            learnBtn.style.transform = 'translateY(-5px)';
+            learnBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+            });
+
+            learnBtn.addEventListener('mouseleave', () => {
+            learnBtn.style.transform = 'translateY(0)';
+            learnBtn.style.backgroundColor = 'transparent';
+            });
+        </script>
     </div>
 </div>
 

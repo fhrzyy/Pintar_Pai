@@ -80,7 +80,7 @@
                 </div>
 
                 <button type="submit" 
-                    class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-[1.02]">
+                    class="w-full bg-gradient-to-b from-indigo-600 to-purple-700 text-white py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-[1.02]">
                     <i class="fas fa-user-plus mr-2"></i> Daftar
                 </button>
             </form>
