@@ -18,7 +18,7 @@
         <div class="max-w-7xl mx-auto">
             <!-- Header -->
             <div class="bg-white p-8 rounded-2xl shadow-lg mb-8">
-                <h1 class="text-3xl font-bold text-gray-800">Dashboard Admin</h1>
+                <h1 class="text-3xl font-bold text-gray-800">Dashboard Guru</h1>
                 <p class="text-gray-600 mt-2">Selamat datang kembali! Berikut adalah ringkasan aktivitas pembelajaran.</p>
             </div>
 
