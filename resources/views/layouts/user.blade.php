@@ -6,19 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @media (max-width: 768px) {
+            .sidebar-open {
+                transform: translateX(0);
+            }
+            .sidebar-closed {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
 </head>
 
 <body class="bg-gray-50 font-sans">
-    <div class="flex min-h-screen">
+    <div class="flex min-h-screen relative">
+        <!-- Mobile Menu Toggle Button -->
+        <button id="menuToggle" class="md:hidden fixed top-4 left-4 z-50 bg-indigo-600 text-white p-2 rounded-lg shadow-lg">
+            <svg id="menuIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+            <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+
         <!-- Sidebar -->
-        <!-- w-72 h-screen bg-gradient-to-b from-indigo-600 to-purple-700 text-white shadow-xl fixed -->
-         <!-- w-72 h-screen bg-blue-700 text-white shadow-xl fixed -->
-        <aside class="w-72 h-screen bg-gradient-to-b from-indigo-600 to-purple-700 text-white shadow-xl fixed">
+        <aside id="sidebar" class="w-72 h-screen bg-gradient-to-b from-indigo-600 to-purple-700 text-white shadow-xl fixed z-40 transition-transform duration-300 ease-in-out md:translate-x-0 sidebar-closed overflow-y-auto">
             <header class="p-2 border-b border-indigo-500/30">
                 <h2 class="text-2xl font-bold tracking-tight flex items-center">
-                <div class="flex items-center gap-0">
-                    <img src="{{ asset('img/Lms-Pai/LogoGix.png') }}" alt="Logo" class="w-35 h-20 rounded-full">
-                </div>
+                    <div class="flex items-center gap-0">
+                        <img src="{{ asset('img/Lms-Pai/LogoGix.png') }}" alt="Logo" class="w-35 h-20 rounded-full">
+                    </div>
                 </h2>
             </header>
             <div class="p-4">
@@ -33,7 +51,6 @@
                             <h3 class="font-medium">{{ Auth::user()->name }}</h3>
                             <p class="text-xs text-indigo-200">Siswa</p>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -77,7 +94,7 @@
                 </ul>
 
                 <p class="text-xs text-indigo-200 font-semibold px-2 mt-6 mb-2">ACCOUNT</p>
-                <ul class="space-y-2">
+                <ul class="space-y-2 mb-6">
                     <li class="transition-all duration-200 hover:bg-white/10 rounded-xl">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -95,11 +112,57 @@
             </nav>
         </aside>
 
+        <!-- Overlay for mobile menu -->
+        <div id="sidebarOverlay" class="fixed inset-0 bg-black opacity-50 z-30 hidden transition-opacity duration-300 ease-in-out"></div>
+
         <!-- Main Content -->
-        <main class="flex-1 ml-72 p-8">
-            @yield('content')
+        <main class="flex-1 transition-all duration-300 ease-in-out md:ml-72 p-4 md:p-8">
+            <div class="mt-12 md:mt-0">
+                @yield('content')
+            </div>
         </main>
     </div>
+
+    <script>
+        // Mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            const menuIcon = document.getElementById('menuIcon');
+            const closeIcon = document.getElementById('closeIcon');
+            
+            function toggleSidebar() {
+                sidebar.classList.toggle('sidebar-open');
+                sidebar.classList.toggle('sidebar-closed');
+                sidebarOverlay.classList.toggle('hidden');
+                menuIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('hidden');
+            }
+            
+            menuToggle.addEventListener('click', toggleSidebar);
+            
+            // Close sidebar when clicking on overlay
+            sidebarOverlay.addEventListener('click', toggleSidebar);
+            
+            // Close sidebar when window is resized to desktop size
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768 && sidebar.classList.contains('sidebar-open')) {
+                    toggleSidebar();
+                }
+            });
+            
+            // Close sidebar when links are clicked on mobile
+            const sidebarLinks = sidebar.querySelectorAll('a');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 768 && sidebar.classList.contains('sidebar-open')) {
+                        toggleSidebar();
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -37,6 +37,10 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/questions/{id}/edit', [AdminController::class, 'editQuestion'])->name('admin.questions.edit');
     Route::put('/questions/{id}', [AdminController::class, 'updateQuestion'])->name('admin.questions.update');
     Route::delete('/questions/{id}', [AdminController::class, 'destroyQuestion'])->name('admin.questions.destroy');
+
+    // siswa
+    Route::get('/admin/students', [App\Http\Controllers\AdminController::class, 'indexStudents'])->name('admin.students.index');
+    Route::get('/admin/students/pdf', [App\Http\Controllers\AdminController::class, 'generateStudentsPDF'])->name('admin.students.pdf');
 });
 
 // ...existing code...
@@ -67,23 +71,3 @@ Route::prefix('user')->middleware(['auth', 'user'])->group(function () {
     Route::get('/results/{result_id}', [UserController::class, 'showResult'])
         ->name('user.results.show');
 });
-
-// // User routes (dengan autentikasi)
-// Route::prefix('user')->middleware(['auth', 'user'])->group(function () {
-//     Route::get('/home', [UserController::class, 'home'])->name('user.home');
-    
-//     // Materi
-//     Route::get('/materials', [UserController::class, 'materials'])->name('user.materials.index');
-//     Route::get('/materials/{id}', [UserController::class, 'showMaterial'])->name('user.materials.show');
-    
-//     // Soal
-    
-//     Route::get('/questions/select-material', [UserController::class, 'selectMaterialForQuestions'])
-//         ->name('user.questions.select-material');
-//     Route::get('/questions/{material_id}', [UserController::class, 'index'])
-//         ->name('user.questions.index');
-//     Route::get('/questions/{id}/show', [UserController::class, 'showQuestion'])
-//         ->name('user.questions.show');
-//     Route::post('/questions/{id}/submit', [UserController::class, 'submitAnswer'])
-//         ->name('user.questions.submit');
-// });

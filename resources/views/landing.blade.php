@@ -16,7 +16,7 @@
 
         .hero-section {
             background: linear-gradient(135deg, rgba(59, 58, 104, 0.28), rgba(0, 0, 0, 0.47)),
-                url('https://plus.unsplash.com/premium_photo-1678558953671-c0d8a2d00501?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center;
+                url('https://images.unsplash.com/photo-1740829963560-3a15cc74078c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center;
             background-size: cover;
             position: relative;
         }
@@ -450,11 +450,11 @@
                 <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 hover:shadow-md transition-all duration-300">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-                            <span class="text-blue-600 font-bold">A</span>
+                            <span class="text-blue-600 font-bold">B</span>
                         </div>
                         <div>
-                            <h4 class="font-bold">Ahmad</h4>
-                            <p class="text-sm text-gray-600">Pelajar SMA</p>
+                            <h4 class="font-bold">Bayu Ardiansyah</h4>
+                            <p class="text-sm text-gray-600">Siswa Kelas XI RPL 2</p>
                         </div>
                     </div>
                     <p class="text-gray-700">"Alhamdulillah, LMS PAI membantu saya memahami ajaran Islam dengan cara yang menyenangkan. Materinya lengkap dan mudah dipahami."</p>
@@ -471,11 +471,11 @@
                 <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 hover:shadow-md transition-all duration-300">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mr-4">
-                            <span class="text-pink-600 font-bold">F</span>
+                            <span class="text-pink-600 font-bold">M</span>
                         </div>
                         <div>
-                            <h4 class="font-bold">Fatimah</h4>
-                            <p class="text-sm text-gray-600">Mahasiswa</p>
+                            <h4 class="font-bold">Mila Lestary</h4>
+                            <p class="text-sm text-gray-600">Siswi Kelas XI RPL 2</p>
                         </div>
                     </div>
                     <p class="text-gray-700">"Platform yang sangat membantu untuk memperdalam ilmu agama di tengah kesibukan kuliah. Saya bisa belajar kapan saja dan dimana saja."</p>
@@ -492,11 +492,11 @@
                 <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 hover:shadow-md transition-all duration-300">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
-                            <span class="text-green-600 font-bold">H</span>
+                            <span class="text-green-600 font-bold">F</span>
                         </div>
                         <div>
-                            <h4 class="font-bold">Hasan</h4>
-                            <p class="text-sm text-gray-600">Profesional</p>
+                            <h4 class="font-bold">Fahrur Rozi</h4>
+                            <p class="text-sm text-gray-600">Ketua kelas XI RPL 2</p>
                         </div>
                     </div>
                     <p class="text-gray-700">"Sebagai seorang profesional, LMS PAI memberikan saya kesempatan untuk tetap belajar agama meski dengan jadwal kerja yang padat. Sangat direkomendasikan!"</p>

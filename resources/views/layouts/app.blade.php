@@ -6,12 +6,49 @@
     <title>@yield('title', 'Admin-Pintar Pai')</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+            }
+            .sidebar-open {
+                transform: translateX(0);
+            }
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0,0,0,0.5);
+                z-index: 10;
+            }
+            .sidebar-open + .overlay {
+                display: block;
+            }
+        }
+    </style>
 </head>
 
-<body class="bg-gray-50 font-sans">
-    <div class="flex min-h-screen">
+<body class="bg-gray-50 font-sans" x-data="{ sidebarOpen: false }">
+    <div class="flex min-h-screen relative">
+        <!-- Mobile Hamburger Button -->
+        <div class="md:hidden fixed top-4 left-4 z-30">
+            <button @click="sidebarOpen = !sidebarOpen" class="p-2 bg-indigo-600 rounded-md text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path x-show="!sidebarOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    <path x-show="sidebarOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
         <!-- Sidebar -->
-        <aside class="w-72 h-screen bg-gradient-to-b from-indigo-600 to-purple-700 text-white shadow-xl fixed">
+        <aside 
+            class="sidebar w-72 h-screen bg-gradient-to-b from-indigo-600 to-purple-700 text-white shadow-xl fixed z-20"
+            :class="{'sidebar-open': sidebarOpen}"
+        >
             <!-- Header with Logo -->
             <header class="p-2 border-b border-indigo-500/30">
                 <h2 class="text-2xl font-bold tracking-tight flex items-center">
@@ -82,6 +119,18 @@
                             <span class="ml-auto bg-green-400/20 text-xs py-1 px-2 rounded-md">New</span>
                         </a>
                     </li>
+
+                    <!-- Students Section -->
+                    <li class="transition-all duration-200 hover:bg-white/10 rounded-xl">
+                        <a href="{{ route('admin.students.index') }}" class="flex items-center p-3 text-white group">
+                            <div class="bg-white/10 p-2 rounded-lg mr-3 group-hover:bg-white group-hover:text-indigo-600 transition-all duration-200">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a2 2 0 00-2-2h-3m-2 4H4v-2a2 2 0 012-2h3m0-4a4 4 0 100-8 4 4 0 000 8z"></path>
+                                </svg>
+                            </div>
+                            <span class="font-medium">Daftar Siswa</span>
+                        </a>
+                    </li>
                 </ul>
 
                 <!-- Account Section -->
@@ -104,8 +153,12 @@
             </nav>
         </aside>
 
+        <!-- Overlay for mobile -->
+        <div class="overlay" @click="sidebarOpen = false" x-show="sidebarOpen"></div>
+
         <!-- Main Content -->
-        <main class="flex-1 ml-72 p-8">
+        <main class="flex-1 md:ml-72 p-8 transition-all duration-300">
+            <div class="md:hidden h-14"></div> <!-- Spacer for mobile to avoid content being hidden under hamburger -->
             @yield('content')
         </main>
     </div>

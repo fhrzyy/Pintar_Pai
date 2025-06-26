@@ -4,21 +4,80 @@ namespace App\Http\Controllers;
 
 use App\Models\Material;
 use App\Models\Question;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use PDF; // Alias for barryvdh/laravel-dompdf
 
 class AdminController extends Controller {
-    //Menu Home
+    // Menu Home
     public function home() {
         $materialCount = Material::count();
         $questionCount = Question::count();
         return view('admin.home', compact('materialCount', 'questionCount'));
     }
-    
+
+    // Menampilkan daftar siswa
+    public function indexStudents() {
+        $students = User::where('id', '!=', auth()->id())->latest()->paginate(10);
+        return view('admin.students.index', compact('students'));
+    }
+
+    // Generate PDF untuk daftar siswa
+    public function generateStudentsPDF() {
+        $students = User::where('id', '!=', auth()->id())->get();
+
+        // Prepare HTML content for PDF
+        $html = '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Siswa</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        h1 { text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>Daftar Siswa</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>';
+
+        foreach ($students as $index => $student) {
+            $html .= '<tr>';
+            $html .= '<td>' . ($index + 1) . '</td>';
+            $html .= '<td>' . htmlspecialchars($student->name) . '</td>';
+            $html .= '<td>' . htmlspecialchars($student->email) . '</td>';
+            $html .= '</tr>';
+        }
+
+        $html .= '</tbody>
+    </table>
+</body>
+</html>';
+
+        // Generate PDF using dompdf
+        $pdf = PDF::loadHTML($html);
+
+        // Download the PDF
+        return $pdf->download('daftar_siswa.pdf');
+    }
+
     // Menampilkan daftar materi
     public function index() {
-       $materials = Material::latest()->paginate(10); // Menggunakan paginate() alih-alih get()
-    return view('admin.materials.index', compact('materials'));
+        $materials = Material::latest()->paginate(10);
+        return view('admin.materials.index', compact('materials'));
     }
 
     // Form upload materi
@@ -44,9 +103,7 @@ class AdminController extends Controller {
         $data = ['title' => $request->title];
 
         if ($request->hasFile('file')) {
-            // Hapus file lama
             Storage::disk('public')->delete($material->file_path);
-            // Upload file baru
             $file = $request->file('file');
             $fileName = time() . '_' . $file->getClientOriginalName();
             $filePath = $file->storeAs('uploads', $fileName, 'public');
@@ -62,9 +119,7 @@ class AdminController extends Controller {
     // Hapus materi
     public function destroyMaterial($id) {
         $material = Material::findOrFail($id);
-        // Hapus file dari storage
         Storage::disk('public')->delete($material->file_path);
-        // Hapus materi (soal terkait akan otomatis terhapus karena onDelete('cascade'))
         $material->delete();
 
         return redirect()->route('admin.materials.index')->with('success', 'Materi berhasil dihapus!');
@@ -92,24 +147,19 @@ class AdminController extends Controller {
 
     // Menampilkan daftar soal
     public function indexQuestion() {
-        $materials = Material::all(); // Ambil semua data materi
-        $questions = Question::with('material')
-                           ->latest()
-                           ->paginate(10);  
-
+        $materials = Material::all();
+        $questions = Question::with('material')->latest()->paginate(10);
         return view('admin.questions.index', compact('questions', 'materials'));
     }
 
-    // Form tambah soal (diperbarui untuk multiple soal)
-    public function createQuestion()
-    {
+    // Form tambah soal
+    public function createQuestion() {
         $materials = Material::all();
         return view('admin.questions.create', compact('materials'));
     }
 
-    // Simpan soal (diperbarui untuk multiple soal)
-    public function storeQuestion(Request $request)
-    {
+    // Simpan soal
+    public function storeQuestion(Request $request) {
         $request->validate([
             'material_id' => 'required|exists:materials,id',
             'questions' => 'required|array|min:1',
@@ -117,11 +167,9 @@ class AdminController extends Controller {
             'questions.*.options' => 'required|array|size:4',
             'questions.*.correct_answer' => 'required|in:A,B,C,D',
         ]);
-    
+
         foreach ($request->questions as $questionData) {
-            // Konversi array options menjadi format dengan kunci A,B,C,D
             $options = array_combine(['A', 'B', 'C', 'D'], $questionData['options']);
-    
             Question::create([
                 'material_id' => $request->material_id,
                 'question_text' => $questionData['question_text'],
@@ -129,22 +177,21 @@ class AdminController extends Controller {
                 'correct_answer' => $questionData['correct_answer'],
             ]);
         }
-    
+
         return redirect()->route('admin.questions.index')
             ->with('success', 'Soal-soal berhasil ditambahkan!');
     }
-    
-    public function updateQuestion(Request $request, $id)
-    {
+
+    // Update soal
+    public function updateQuestion(Request $request, $id) {
         $request->validate([
             'material_id' => 'required|exists:materials,id',
             'question_text' => 'required|string',
             'options' => 'required|array|size:4',
             'correct_answer' => 'required|in:A,B,C,D',
         ]);
-    
+
         $options = array_combine(['A', 'B', 'C', 'D'], $request->options);
-    
         $question = Question::findOrFail($id);
         $question->update([
             'material_id' => $request->material_id,
@@ -152,19 +199,18 @@ class AdminController extends Controller {
             'options' => $options,
             'correct_answer' => $request->correct_answer,
         ]);
-    
+
         return redirect()->route('admin.questions.index')
             ->with('success', 'Soal berhasil diperbarui!');
     }
 
     // Form edit soal
-        public function editQuestion($id)
-        {
-            $question = Question::findOrFail($id);
-            $materials = Material::all();
-            return view('admin.questions.edit', compact('question', 'materials'));
-        }
-    
+    public function editQuestion($id) {
+        $question = Question::findOrFail($id);
+        $materials = Material::all();
+        return view('admin.questions.edit', compact('question', 'materials'));
+    }
+
     // Hapus soal
     public function destroyQuestion($id) {
         $question = Question::findOrFail($id);
