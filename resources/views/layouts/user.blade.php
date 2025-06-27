@@ -91,6 +91,16 @@
                             <span class="ml-auto bg-green-400/20 text-xs py-1 px-2 rounded-md">New</span>
                         </a>
                     </li>
+
+                    <li class="transition-all duration-200 hover:bg-white/10 rounded-xl">
+    <a href="{{ route('user.quran.index') }}" class="flex items-center p-3 text-white group">
+        <div class="bg-white/10 p-2 rounded-lg mr-3 group-hover:bg-white group-hover:text-indigo-600 transition-all duration-200">
+            📖
+        </div>
+        <span class="font-medium">E-Qur'an</span>
+    </a>
+</li>
+
                 </ul>
 
                 <p class="text-xs text-indigo-200 font-semibold px-2 mt-6 mb-2">ACCOUNT</p>
@@ -131,7 +141,7 @@
             const sidebarOverlay = document.getElementById('sidebarOverlay');
             const menuIcon = document.getElementById('menuIcon');
             const closeIcon = document.getElementById('closeIcon');
-            
+
             function toggleSidebar() {
                 sidebar.classList.toggle('sidebar-open');
                 sidebar.classList.toggle('sidebar-closed');
@@ -139,19 +149,19 @@
                 menuIcon.classList.toggle('hidden');
                 closeIcon.classList.toggle('hidden');
             }
-            
+
             menuToggle.addEventListener('click', toggleSidebar);
-            
+
             // Close sidebar when clicking on overlay
             sidebarOverlay.addEventListener('click', toggleSidebar);
-            
+
             // Close sidebar when window is resized to desktop size
             window.addEventListener('resize', function() {
                 if (window.innerWidth > 768 && sidebar.classList.contains('sidebar-open')) {
                     toggleSidebar();
                 }
             });
-            
+
             // Close sidebar when links are clicked on mobile
             const sidebarLinks = sidebar.querySelectorAll('a');
             sidebarLinks.forEach(link => {

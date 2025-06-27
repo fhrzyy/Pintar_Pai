@@ -4,6 +4,7 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\QuranController;
 
 // Landing page
 Route::get('/', [LandingController::class, 'index'])->name('landing');
@@ -70,4 +71,8 @@ Route::prefix('user')->middleware(['auth', 'user'])->group(function () {
         ->name('user.results.index');
     Route::get('/results/{result_id}', [UserController::class, 'showResult'])
         ->name('user.results.show');
+
+        Route::get('/quran', [QuranController::class, 'index'])->name('user.quran.index');
+        Route::get('/quran/{id}', [QuranController::class, 'show'])->name('user.quran.show');
+
 });
